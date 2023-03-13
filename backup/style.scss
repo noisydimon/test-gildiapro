@@ -1,0 +1,70 @@
+@import "_variables.base";
+@import "_mixins";
+
+/*
+  Import vendor libraries
+*/
+@import "vendor/_normalize";
+
+/*
+  Import utils classes and base styles
+*/
+@import "_utils";
+@import "_base";
+
+/*
+  Import all other blocks
+*/
+@import "_blocks/container";
+@import "_blocks/footer";
+
+//////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////
+
+.products {
+  background-color: rgb(238, 235, 235);
+  padding: 3px;
+}
+
+.products__nav-list {
+  display: flex;
+  column-gap: 6px;
+  @media (max-width: 394px) {
+    column-gap: 0px;
+  }
+}
+.products__button {
+  border: solid 2px rgb(97, 96, 96);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: none;
+  padding: 7px;
+  background-color: rgb(231, 229, 229);
+  &:hover,
+  :active {
+    background-color: white;
+  }
+  @media (max-width: 394px) {
+    padding: 1px;
+  }
+}
+.products__button.active {
+  background-color: white;
+}
+.products__bar {
+  min-height: 270px;
+  background-color: white;
+  border: solid 2px rgb(97, 96, 96);
+  padding: 15px;
+}
+.products__bar-list {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+.products__bar-list-item {
+  width: 60px;
+  height: 60px;
+  border: solid 2px rgb(97, 96, 96);
+}

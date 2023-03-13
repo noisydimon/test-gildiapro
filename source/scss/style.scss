@@ -1,0 +1,105 @@
+@import "_variables.base";
+@import "_mixins";
+
+/*
+  Import vendor libraries
+*/
+@import "vendor/_normalize";
+
+/*
+  Import utils classes and base styles
+*/
+@import "_utils";
+@import "_base";
+
+/*
+  Import all other blocks
+*/
+@import "_blocks/container";
+@import "_blocks/footer";
+
+//////////////////////////////////////////////////////////
+/// //////////////////////////////////////////////////////
+
+.tabs {
+  background-color: rgb(238, 235, 235);
+  padding: 3px;
+}
+
+.tabs__header {
+  margin: 0 3px;
+  display: flex;
+  column-gap: 6px;
+  @media (max-width: 500px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+.tabs__header__caption {
+  border: solid 2px rgb(97, 96, 96);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom: none;
+  padding: 7px;
+  background-color: rgb(231, 229, 229);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  transition: all 400ms;
+  &:hover,
+  :active {
+    background-color: white;
+    cursor: pointer;
+  }
+  @media (max-width: 570px) {
+    padding: 1px;
+  }
+}
+
+.tab__caption.active,
+.tabs__header__caption.active {
+  background-color: white;
+}
+
+.tab__body {
+  display: none;
+  min-height: 270px;
+  background-color: white;
+  border: solid 2px rgb(97, 96, 96);
+  padding: 15px;
+}
+
+.tab__body.active {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.product {
+  width: 80px;
+
+  text-align: center;
+}
+
+.product__title {
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.product__img {
+  width: 100%;
+  border: 1px solid rgb(231, 229, 229);
+}
+
+.product__description {
+  font-style: italic;
+}
+
+.product-template {
+  visibility: hidden;
+}
