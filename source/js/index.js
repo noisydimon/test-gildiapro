@@ -1,9 +1,12 @@
+//1-Слушатель на  отрисовку страницы//
 document.addEventListener("DOMContentLoaded", () => main());
 
+//2-Главная функция (вызов в 1)//
 function main() {
   fetchData().then((data) => renderData(data));
 }
 
+//3-Функция получения объектов из json при помощи промисов (вызов в 2)//
 function fetchData() {
   const fetchCategories = fetchJson(
     "https://dummyjson.com/products/categories"
@@ -15,11 +18,14 @@ function fetchData() {
       transformCategories(categories, productsResponse.products)
   );
 }
-
+//4-Функция обработки json (вызов в 3)//
 function fetchJson(url) {
   return fetch(url).then((response) => response.json());
 }
-
+//5-Функция создания нового объекта из 2-х что вернулись из проммиса (вызов в 3)//
+//map - создаю в массиве объекты с name - категории
+//и products - фильтруем те объекты которые совпадают названиями категорий
+//отфильтровали объекты где кол-во продуктов больше 0
 function transformCategories(categories, products) {
   return categories
     .map((category) => ({
@@ -28,7 +34,8 @@ function transformCategories(categories, products) {
     }))
     .filter((category) => category.products.length > 0);
 }
-
+//6-Функция отрисовки вкладок и полей с продуктами (вызов в 2)//
+//находим шаблоны и для каждой категории отрисовываем вкладки и продукты
 function renderData(data) {
   const tabCaptionTemplate = document.querySelector("#tab-caption-template");
   const tabBodyTemplate = document.querySelector("#tab-body-template");
@@ -44,7 +51,7 @@ function renderData(data) {
   activateTabs(data[0].name);
   activateCaption();
 }
-
+//7-Функция отрисовки вкладок (вызов в 6)//
 function renderCategoryTab(tabCaptionTemplate, category) {
   const tabCaptionId = "caption_" + category;
   const tabHeader = tabCaptionTemplate.cloneNode(true);
@@ -57,6 +64,7 @@ function renderCategoryTab(tabCaptionTemplate, category) {
   return tabHeader;
 }
 
+//8-Функция отрисовки полей с продуктами (вызов в 6)//
 function renderProducts(tabBodyTemplate, category, products) {
   const tabBodyId = "tab_" + category;
 
@@ -77,7 +85,7 @@ function renderProducts(tabBodyTemplate, category, products) {
 
   return tabBody;
 }
-
+//9-Функция слушателя  (вызов в 7)//
 function onTabHeaderClick(event) {
   const tabCaption = event.target.closest(".tabs__header__caption");
   if (!tabCaption) return;
@@ -92,14 +100,14 @@ function onTabHeaderClick(event) {
 
   activateTabs(category);
 }
-
+//10-Функция активации вкладки и поля с продуктами  (вызов в 9 и в 6)//
 function activateTabs(category) {
   document
     .querySelectorAll(".tab__body.active")
     .forEach((tab) => tab.classList.remove("active"));
   document.querySelector("#tab_" + category).classList.add("active");
 }
-
+//10-Функция активации отрисовки  (вызов в 9 и в 6)//
 function activateCaption() {
   document
     .querySelector(".tabs__header")
